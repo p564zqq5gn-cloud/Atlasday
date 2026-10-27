@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover unforgettable travel experiences around the world with AtlasDay.">
+  <title>AtlasDay — Discover Your Next Experience</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #172033;
+      background: #f7f9fc;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 7%;
+      background: white;
+    }
+    .logo { font-size: 26px; font-weight: 800; color: #176b55; }
+    nav a { margin-left: 20px; color: #172033; text-decoration: none; }
+    .hero {
+      padding: 80px 7%;
+      color: white;
+      background: linear-gradient(120deg, #123e45, #16836c);
+    }
+    .hero h1 { max-width: 720px; font-size: clamp(38px, 7vw, 66px); margin: 0 0 18px; }
+    .hero p { max-width: 600px; font-size: 19px; line-height: 1.6; }
+    .search { margin-top: 28px; display: flex; gap: 10px; flex-wrap: wrap; }
+    input, select, button {
+      padding: 14px; border-radius: 9px; border: 0; font-size: 16px;
+    }
+    input, select { max-width: 100%; }
+    button { background: #f6c85f; color: #172033; font-weight: bold; cursor: pointer; }
+    main { padding: 45px 7%; }
+    h2 { font-size: 30px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .card { overflow: hidden; border-radius: 16px; background: white; box-shadow: 0 5px 22px #10203012; }
+    .picture { height: 160px; display: grid; place-items: center; font-size: 60px; background: #dcece7; }
+    .card-content { padding: 20px; }
+    .card p { color: #5d6878; line-height: 1.5; }
+    .card a { color: #176b55; font-weight: bold; text-decoration: none; }
+    .tag { font-size: 12px; font-weight: bold; color: #176b55; text-transform: uppercase; }
+    footer { padding: 30px 7%; background: #122b32; color: white; }
+    footer p { color: #d6e3e5; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">AtlasDay</div>
+    <nav><a href="#destinations">Explore</a><a href="#about">About</a></nav>
+  </header>
+  <section class="hero">
+    <p>MAKE EVERY DAY AN ADVENTURE</p>
+    <h1>Discover experiences worth travelling for.</h1>
+    <p>Find memorable tours, local adventures and unforgettable things to do around the world.</p>
+    <div class="search">
+      <input id="search" type="search" placeholder="Search a destination...">
+      <button onclick="filterCards()">Explore experiences</button>
+    </div>
+  </section>
+  <main id="destinations">
+    <h2>Explore the world</h2>
+    <p>Find inspiration for your next adventure.</p>
+    <div class="cards" id="cards">
+      <article class="card" data-city="rome italy">
+        <div class="picture">🏛️</div>
+        <div class="card-content">
+          <div class="tag">History & culture</div>
+          <h3>Discover Rome</h3>
+          <p>Explore ancient landmarks, charming streets and Italian food.</p>
+          <a href="https://www.viator.com/" target="_blank" rel="noopener noreferrer">Explore Rome →</a>
+        </div>
+      </article>
+      <article class="card" data-city="lisbon portugal">
+        <div class="picture">🚋</div>
+        <div class="card-content">
+          <div class="tag">City escapes</div>
+          <h3>Experience Lisbon</h3>
+          <p>Discover colourful streets, ocean views and local culture.</p>
+          <a href="https://www.viator.com/" target="_blank" rel="noopener noreferrer">Explore Lisbon →</a>
+        </div>
+      </article>
+      <article class="card" data-city="tokyo japan">
+        <div class="picture">⛩️</div>
+        <div class="card-content">
+          <div class="tag">Food & adventure</div>
+          <h3>Explore Tokyo</h3>
+          <p>Experience vibrant neighbourhoods, food and Japanese traditions.</p>
+          <a href="https://www.viator.com/" target="_blank" rel="noopener noreferrer">Explore Tokyo →</a>
+        </div>
+      </article>
+    </div>
+    <p id="empty" hidden>No destinations found. Try another search.</p>
+  </main>
+  <main id="about">
+    <h2>Travel deeper. Discover more.</h2>
+    <p>AtlasDay helps travellers discover ideas for their next memorable experience.</p>
+  </main>
+  <footer>
+    <strong>AtlasDay</strong>
+    <p>Discover your world, one experience at a time.</p>
+    <p>Some links may become affiliate links in the future. We may earn a commission from qualifying bookings.</p>
+    <p>© 2026 AtlasDay</p>
+  </footer>
+  <script>
+    function filterCards() {
+      const query = document.getElementById('search').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.card');
+      let visible = 0;
+      cards.forEach(card => {
+        const match = card.dataset.city.includes(query) ||
+          card.innerText.toLowerCase().includes(query);
+        card.hidden = !match;
+        if (match) visible++;
+      });
+      document.getElementById('empty').hidden = visible > 0;
+    }
+    document.getElementById('search').addEventListener('input', filterCards);
+  </script>
+</body>
+</html>
